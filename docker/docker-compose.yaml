@@ -1,0 +1,39 @@
+version: "3.9"
+services:
+  zookeeper:
+    container_name: home-assignment-zookeeper
+    image: "bitnami/zookeeper:3.7"
+    networks:
+      - app-network
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    ports:
+      - "127.0.0.1:2181:2181"
+
+  kafka:
+    container_name: home-assignment-kafka
+    image: "bitnami/kafka:3"
+    hostname: kafka
+    networks:
+      - app-network
+    environment:
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CFG_LISTENERS: INSIDE://:9092,OUTSIDE://:9094
+      KAFKA_CFG_ADVERTISED_LISTENERS: INSIDE://:9092,OUTSIDE://:9094
+      KAFKA_CFG_INTER_BROKER_LISTENER_NAME: INSIDE
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_CFG_SASL_ENABLED_MECHANISMS: PLAIN
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_CLIENT_USER: kafka
+      KAFKA_CLIENT_PASSWORD: kafka
+    ports:
+      - "127.0.0.1:9094:9094"
+    depends_on:
+      - zookeeper
+  
+  # Create your application here, attach to the same network: app-network
+
+networks:
+    app-network:
+      driver: bridge
