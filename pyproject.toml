@@ -6,6 +6,8 @@ authors = ["CoE"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+kafka-python = "^2.0.2"
+PyYAML = "^6.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"

@@ -1,0 +1,32 @@
+version: 1
+disable_existing_loggers: true
+
+formatters:
+  simple:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+
+handlers:
+  importer_log:
+      class: logging.handlers.RotatingFileHandler
+      level: INFO
+      formatter: simple
+      filename: /log/importer.log
+      encoding: utf8
+      mode: w
+  python_log:
+      class: logging.handlers.RotatingFileHandler
+      level: DEBUG
+      formatter: simple
+      filename: /log/python.log
+      encoding: utf8
+      mode: w
+
+loggers:
+  importer:
+    level: DEBUG
+    handlers: [importer_log]
+    propagate: no
+
+root:
+  level: DEBUG
+  handlers: [python_log]
