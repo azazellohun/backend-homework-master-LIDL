@@ -6,11 +6,25 @@ formatters:
     format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 
 handlers:
-  importer_log:
+  producer_log:
       class: logging.handlers.RotatingFileHandler
       level: INFO
       formatter: simple
-      filename: /log/importer.log
+      filename: /log/producer.log
+      encoding: utf8
+      mode: w
+  consumer_log:
+      class: logging.handlers.RotatingFileHandler
+      level: INFO
+      formatter: simple
+      filename: /log/consumer.log
+      encoding: utf8
+      mode: w
+  error_log:
+      class: logging.handlers.RotatingFileHandler
+      level: INFO
+      formatter: simple
+      filename: /log/error.log
       encoding: utf8
       mode: w
   python_log:
@@ -22,9 +36,17 @@ handlers:
       mode: w
 
 loggers:
-  importer:
+  producer:
     level: DEBUG
-    handlers: [importer_log]
+    handlers: [producer_log]
+    propagate: no
+  consumer:
+    level: DEBUG
+    handlers: [consumer_log]
+    propagate: no
+  error:
+    level: DEBUG
+    handlers: [error_log]
     propagate: no
 
 root:
