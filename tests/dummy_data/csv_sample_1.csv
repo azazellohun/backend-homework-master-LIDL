@@ -1,0 +1,2 @@
+transaction_id,event_type,date,store_number,item_number,value
+7c71fb42-1f5e-45e1-be16-7d4d772d1aab,sale,2018-12-03T23:57:40Z,9,8,116

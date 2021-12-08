@@ -1,0 +1,2 @@
+transaction_id,event_type,date,store_number,item_number,value
+a64eaefa-16cc-4dda-a081-7b468d1bcfcc,incoming,2018-10-17T05:00:05Z,4,2,151
