@@ -18,7 +18,6 @@ def produce_records(topic_name, data_path):
         :param data_path: Data path
     """ 
     logger = logging.getLogger('producer')
-    error_logger = logging.getLogger('error')
 
     producer = KafkaProducer(bootstrap_servers=['kafka:9094'],
                             api_version=(0,10,2),
@@ -30,7 +29,7 @@ def produce_records(topic_name, data_path):
     # Sending events to kafka
     for record in reader:        
         if isinstance(record, ConversionError):
-            error_logger.error(record.error_msg)
+            logger.error(record.error_msg)
             continue
         
         transaction_id, event_type,date, store_number, item_number, value = record

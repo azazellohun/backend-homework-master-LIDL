@@ -22,7 +22,7 @@ handlers:
       mode: w
   error_log:
       class: logging.handlers.RotatingFileHandler
-      level: INFO
+      level: ERROR
       formatter: simple
       filename: /log/error.log
       encoding: utf8
@@ -38,15 +38,11 @@ handlers:
 loggers:
   producer:
     level: DEBUG
-    handlers: [producer_log]
+    handlers: [producer_log, error_log]
     propagate: no
   consumer:
     level: DEBUG
-    handlers: [consumer_log]
-    propagate: no
-  error:
-    level: DEBUG
-    handlers: [error_log]
+    handlers: [consumer_log, error_log]
     propagate: no
 
 root:
